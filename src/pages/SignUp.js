@@ -3,7 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { ref, set } from "firebase/database";
+import { ref, set, query, orderByChild, equalTo, get } from "firebase/database";
 import "./SignUp.css";
 
 const SignUp = () => {
@@ -37,7 +37,16 @@ const SignUp = () => {
       alert("Please select an account type.");
       return;
     }
-
+    
+    if (role === "Employer"){
+    const userRef = ref(db, "users")
+    const usersQuery = query (userRef, orderByChild("businessName"),equalTo(businessName))
+    const snapshot = await get(usersQuery)
+    if (snapshot.exists()){
+    alert("Business name already exists. Try another.")
+    return
+    }
+  }
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -60,7 +69,11 @@ const SignUp = () => {
       }
 
       // Store user details in Realtime Database
+      // Shows the business name
       await set(ref(db, "users/" + user.uid), userData);
+      await set (ref(db, "businesses/" + businessName),{
+        owner: user.uid
+      })
 
       // Show browser confirmation popup
       const confirmation = window.confirm(

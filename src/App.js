@@ -20,6 +20,7 @@ import Messaging from "./components/Messaging";
 import Deductions from './pages/Deductions';
 import { onAuthStateChanged } from "firebase/auth"; // Import Firebase auth listener
 import { auth } from "./firebase"; // Import your Firebase config
+import FreelancerExpenses from "./pages/FreelancerExpenses";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -87,6 +88,10 @@ const App = () => {
           <Route
             path="/expenses"
             element={isLoggedIn ? <Expenses /> : <Navigate to="/sign-in" />}
+          />
+           <Route
+            path="/freelancerexpenses"
+            element={isLoggedIn ? <FreelancerExpenses /> : <Navigate to="/sign-in" />}
           />
           <Route
             path="/job-board"
