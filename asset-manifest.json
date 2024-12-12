@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.731bf0a1.css",
+    "main.js": "/static/js/main.c52184d6.js",
+    "static/js/239.cb3f7f71.chunk.js": "/static/js/239.cb3f7f71.chunk.js",
+    "static/js/213.b0a67077.chunk.js": "/static/js/213.b0a67077.chunk.js",
+    "static/js/732.18379be4.chunk.js": "/static/js/732.18379be4.chunk.js",
+    "static/js/453.e428b62d.chunk.js": "/static/js/453.e428b62d.chunk.js",
+    "static/media/taxzilla.png": "/static/media/taxzilla.556ac87151662d637ade.png",
+    "static/media/taxzilla-text.png": "/static/media/taxzilla-text.244caec95bfd2bf4a977.png",
+    "index.html": "/index.html",
+    "main.731bf0a1.css.map": "/static/css/main.731bf0a1.css.map",
+    "main.c52184d6.js.map": "/static/js/main.c52184d6.js.map",
+    "239.cb3f7f71.chunk.js.map": "/static/js/239.cb3f7f71.chunk.js.map",
+    "213.b0a67077.chunk.js.map": "/static/js/213.b0a67077.chunk.js.map",
+    "732.18379be4.chunk.js.map": "/static/js/732.18379be4.chunk.js.map",
+    "453.e428b62d.chunk.js.map": "/static/js/453.e428b62d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.731bf0a1.css",
+    "static/js/main.c52184d6.js"
+  ]
+}
