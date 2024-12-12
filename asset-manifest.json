@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/TaxZilla/static/css/main.731bf0a1.css",
-    "main.js": "/TaxZilla/static/js/main.1f943ca4.js",
-    "static/js/239.cb3f7f71.chunk.js": "/TaxZilla/static/js/239.cb3f7f71.chunk.js",
-    "static/js/213.b0a67077.chunk.js": "/TaxZilla/static/js/213.b0a67077.chunk.js",
-    "static/js/732.18379be4.chunk.js": "/TaxZilla/static/js/732.18379be4.chunk.js",
-    "static/js/453.e428b62d.chunk.js": "/TaxZilla/static/js/453.e428b62d.chunk.js",
-    "static/media/taxzilla.png": "/TaxZilla/static/media/taxzilla.556ac87151662d637ade.png",
-    "static/media/taxzilla-text.png": "/TaxZilla/static/media/taxzilla-text.244caec95bfd2bf4a977.png",
-    "index.html": "/TaxZilla/index.html",
-    "main.731bf0a1.css.map": "/TaxZilla/static/css/main.731bf0a1.css.map",
-    "main.1f943ca4.js.map": "/TaxZilla/static/js/main.1f943ca4.js.map",
-    "239.cb3f7f71.chunk.js.map": "/TaxZilla/static/js/239.cb3f7f71.chunk.js.map",
-    "213.b0a67077.chunk.js.map": "/TaxZilla/static/js/213.b0a67077.chunk.js.map",
-    "732.18379be4.chunk.js.map": "/TaxZilla/static/js/732.18379be4.chunk.js.map",
-    "453.e428b62d.chunk.js.map": "/TaxZilla/static/js/453.e428b62d.chunk.js.map"
+    "main.css": "/Taxzilla/static/css/main.731bf0a1.css",
+    "main.js": "/Taxzilla/static/js/main.ed4a8439.js",
+    "static/js/239.cb3f7f71.chunk.js": "/Taxzilla/static/js/239.cb3f7f71.chunk.js",
+    "static/js/213.b0a67077.chunk.js": "/Taxzilla/static/js/213.b0a67077.chunk.js",
+    "static/js/732.18379be4.chunk.js": "/Taxzilla/static/js/732.18379be4.chunk.js",
+    "static/js/453.e428b62d.chunk.js": "/Taxzilla/static/js/453.e428b62d.chunk.js",
+    "static/media/taxzilla.png": "/Taxzilla/static/media/taxzilla.556ac87151662d637ade.png",
+    "static/media/taxzilla-text.png": "/Taxzilla/static/media/taxzilla-text.244caec95bfd2bf4a977.png",
+    "index.html": "/Taxzilla/index.html",
+    "main.731bf0a1.css.map": "/Taxzilla/static/css/main.731bf0a1.css.map",
+    "main.ed4a8439.js.map": "/Taxzilla/static/js/main.ed4a8439.js.map",
+    "239.cb3f7f71.chunk.js.map": "/Taxzilla/static/js/239.cb3f7f71.chunk.js.map",
+    "213.b0a67077.chunk.js.map": "/Taxzilla/static/js/213.b0a67077.chunk.js.map",
+    "732.18379be4.chunk.js.map": "/Taxzilla/static/js/732.18379be4.chunk.js.map",
+    "453.e428b62d.chunk.js.map": "/Taxzilla/static/js/453.e428b62d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.731bf0a1.css",
-    "static/js/main.1f943ca4.js"
+    "static/js/main.ed4a8439.js"
   ]
 }
