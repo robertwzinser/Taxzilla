@@ -19,34 +19,27 @@ export const FreelancerWidgets = () => {
   const [stateTaxRate, setStateTaxRate] = useState(0);
 
   useEffect(() => {
-    const fetchEmployers = async () => {
-      const userId = auth.currentUser?.uid;
-      if (!userId) return;
-  
-      const linkedEmployersRef = ref(db, `users/${userId}/linkedEmployers`);
-      const snapshot = await get(linkedEmployersRef);
-      const linkedEmployers = snapshot.val();
-  
-      if (linkedEmployers) {
-        const employersData = [];
-        for (const [id, employer] of Object.entries(linkedEmployers)) {
-          const employerRef = ref(db, `users/${id}`);
-          const empSnapshot = await get(employerRef);
-          const employerData = empSnapshot.val();
-  
-          // Check if the employer has blocked the freelancer
-          const isBlocked = employerData?.blockedUsers?.[userId]?.blocked;
-          if (!isBlocked) {
-            employersData.push({ id, businessName: employer.name });
-          }
+    const user = auth.currentUser;
+    if (user) {
+      // Fetch the user's profile to get the state
+      const userProfileRef = ref(db, `users/${user.uid}`);
+      onValue(userProfileRef, (snapshot) => {
+        const userProfile = snapshot.val();
+        if (userProfile && userProfile.state) {
+          // Fetch the tax rate for the user's state
+          const stateTaxRef = ref(
+            db,
+            `statesCollection/${userProfile.state}/taxRate`
+          );
+          onValue(stateTaxRef, (taxSnapshot) => {
+            const stateTaxRate = taxSnapshot.val();
+            setStateTaxRate(stateTaxRate); // Set the state tax rate
+          });
         }
-        setEmployers(employersData); // Update state with filtered employers
-      }
-    };
-  
-    fetchEmployers();
+      });
+    }
   }, []);
-
+  
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
@@ -123,9 +116,10 @@ export const FreelancerWidgets = () => {
   const calculateAGI = () => {
     const totalIncome = calculateTotalIncome();
     const totalDeductions = calculateTotalDeductions();
-    return totalIncome - totalDeductions;
+    const agi = totalIncome - totalDeductions;
+    return Math.max(agi, 0);
   };
-
+  
   const estimateTaxes = () => {
     const agi = calculateAGI();
     const stateTaxes = agi * stateTaxRate;
@@ -232,6 +226,7 @@ export const FreelancerWidgets = () => {
         };
       }
     });
+    
     return Object.entries(aggregated).map(
       ([date, { amount, estimatedTax }]) => ({
         date,

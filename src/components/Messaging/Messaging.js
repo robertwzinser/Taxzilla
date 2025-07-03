@@ -11,6 +11,7 @@ const Messaging = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [username, setUsername] = useState("");
   const [blockedUsers, setBlockedUsers] = useState({});
   const [allBlockedUsers, setAllBlockedUsers] = useState([]);
   const [showRelationshipModal, setShowRelationshipModal] = useState(false);
@@ -23,6 +24,7 @@ const Messaging = () => {
       const userData = snapshot.val();
       if (userData) {
         setUserRole(userData.role);
+        setUsername(userData.firstname + " " + userData.lastname)
       }
     });
   }, [userId]);
@@ -140,15 +142,23 @@ const Messaging = () => {
         userRole === "Freelancer"
           ? ref(db, `messages/${selectedEmployer}/${userId}`)
           : ref(db, `messages/${userId}/${selectedFreelancer}`);
-  
+      const notificationRef = userRole === "Freelancer" ? ref(db, `notifications/${selectedEmployer}`) : ref(db, `notifications/${selectedFreelancer}`)
+      //const recipentName = userRole === "Employer" ? employers.find((employer)=> employer.employerId=== selectedEmployer).employerName: freelancers.find((freelancer)=> freelancer.freelancerId===selectedFreelancer).freelancerName
       const newMessage = {
         senderId: userId,
         text: message,
         timestamp: Date.now(),
       };
-  
+      const notification = {
+        message: `New Message From: ${username}`,
+        timestamp: Date.now(),
+        type: "message",
+        fromId: userId,
+      };
       try {
         await push(messageRef, newMessage);
+       await push(notificationRef, notification)
+
         setMessage("");
       } catch (error) {
         console.error("Error sending message:", error.message);

@@ -12,39 +12,38 @@ const Chatbot = () => {
       // Add user message to the messages array
       setMessages([...messages, { user: true, text: input }]);
       setInput("");
-
-      const API_KEY =
-        "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";
+  
+      const API_KEY = process.env.REACT_APP_API_KEY; // Use environment variable
       const apiUrl = "https://api.openai.com/v1/chat/completions";
-
+  
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
       };
-
+  
       const data = {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user", content: input }],
         temperature: 0.7,
       };
-
+  
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
           headers: headers,
           body: JSON.stringify(data),
         });
-
+  
         if (!response.ok) {
           throw new Error(`Server error: ${response.statusText}`);
         }
-
+  
         const result = await response.json();
-
+  
         if (!result.choices || result.choices.length === 0) {
           throw new Error("No response from the AI model");
         }
-
+  
         const botResponse = result.choices[0].message.content.trim();
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -61,7 +60,7 @@ const Chatbot = () => {
         ]);
       }
     }
-  };
+  };  
 
   useEffect(() => {
     if (messageEndRef.current) {

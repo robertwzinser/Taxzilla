@@ -8,7 +8,6 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import "./Navbar.css";
 import "../Notifications/Notifications.css";
 
-
 const Navbar = () => {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -24,14 +23,6 @@ const Navbar = () => {
     if (!userRoleRef.current) {
       setShowNotifications(false);
       return;
-    }
-    
-    if (userRoleRef.current.toLowerCase() === "freelancer") {
-      setShowNotifications(true);
-    } else if (userRoleRef.current.toLowerCase() === "employer") {
-      setShowNotifications(true);
-    } else {
-      setShowNotifications(false);
     }
   };
 
@@ -51,7 +42,6 @@ const Navbar = () => {
     setNotifications(newNotifications);
     updateShouldJobShowNotifications();
   };
-
 
   // Handle notification click with redirection if redirectUrl is present
   const handleNotificationClick = (notification) => {

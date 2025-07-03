@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ref, push, update, get, onValue, query, orderByChild, equalTo } from "firebase/database"; // Firebase DB functions
+import { set, ref, push, update, get, onValue, query, orderByChild, equalTo } from "firebase/database"; // Firebase DB functions
 import { auth, db } from "../../firebase";
 import "./JobBoard.css";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +43,12 @@ const EmployerJobBoard = ({ jobs, setJobs }) => {
       // Update the specific request status to accepted under job requests
       const requestRef = ref(db, `jobs/${jobId}/requests/${freelancerId}`);
       await update(requestRef, { status: "accepted" });
+      onValue(jobRef, snapshot =>{
+        const data = snapshot.val()
+        console.log(data)
+       set(ref(db, `users/${freelancerId}/jobs/${jobId}`),{endDate: data.endDate, startDate: data.startDate})
+      })
+    
 
       // Fetch employer data for adding to freelancer's linkedEmployers
       const employerDataSnapshot = await get(ref(db, `users/${employerId}`));

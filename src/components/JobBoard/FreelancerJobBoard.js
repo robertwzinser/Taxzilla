@@ -67,10 +67,27 @@ const FreelancerJobBoard = ({ jobs, setMessages }) => {
     const jobRef = ref(db, `jobs/${jobId}`);
     const requestRef = ref(db, `jobs/${jobId}/requests/${userId}`);
     const freelancerRef = ref(db, `users/${userId}`);
+    const userJobs = ref (db, `users/${userId}/jobs`)
 
     try {
       const freelancerData = (await get(freelancerRef)).val();
       const freelancerName = `${freelancerData.firstname} ${freelancerData.lastname}`;
+      const userjobdata = await get(userJobs)
+      const jobData = (await get(jobRef)).val();
+      if (userjobdata.exists()){
+        const data = userjobdata.val()
+        for(const [id, job] of Object.entries(data) ){
+          const currentStartDate= new Date (job.startDate).getTime()
+          const currentEndDate= new Date (job.endDate).getTime()
+          const newStartDate= new Date (jobData.startDate).getTime()
+          const newEndDate= new Date (jobData.endDate).getTime()
+          if(newStartDate < currentEndDate && newEndDate > currentStartDate){
+            alert("Cannot request Job")
+            return
+
+          }
+        }
+      }
 
       await set(requestRef, {
         status: "requested",
@@ -78,7 +95,7 @@ const FreelancerJobBoard = ({ jobs, setMessages }) => {
         freelancerName,
       });
 
-      const jobData = (await get(jobRef)).val();
+     
       const employerId = jobData.employerId;
       const notificationRef = ref(db, `notifications/${employerId}`);
       await push(notificationRef, {

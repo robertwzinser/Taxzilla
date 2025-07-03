@@ -3,9 +3,10 @@ import {
   reauthenticateWithCredential,
   EmailAuthProvider,
 } from "firebase/auth";
-import { ref, remove } from "firebase/database";
+import { equalTo, orderByChild, ref, remove, query, get } from "firebase/database";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { equal } from "assert";
 
 const DeleteAccount = () => {
   const navigate = useNavigate();
@@ -39,10 +40,18 @@ const DeleteAccount = () => {
         const user = auth.currentUser;
         if (user) {
           const userId = user.uid;
-
+          const jobRef = ref(db, "jobs")
+          
           const reauthenticated = await reauthenticate();
           if (!reauthenticated) return;
-
+          const jobsquery = query (jobRef, orderByChild("employerId"), equalTo(userId))
+          const jobsdata = await get(jobsquery)
+          if(jobsdata.exists()){
+            jobsdata.forEach((job)=>{
+              const deleteref = ref(db,`jobs/${job.key}`)
+              remove(deleteref)
+              })  
+          }
           await remove(ref(db, "users/" + userId));
           await deleteUser(user);
 
